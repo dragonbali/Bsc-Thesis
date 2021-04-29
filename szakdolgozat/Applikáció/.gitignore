@@ -1,0 +1,10 @@
+react-client/node_modules/
+### vscode ###
+.vscode/*
+*.code-workspace
+react-client/.eslintcache
+api/node_modules
+#
+.env
+./react-client/Dockerfile
+docker-compose.yml
