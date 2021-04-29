@@ -5,6 +5,5 @@ react-client/node_modules/
 react-client/.eslintcache
 api/node_modules
 #
-.env
 ./react-client/Dockerfile
 docker-compose.yml
