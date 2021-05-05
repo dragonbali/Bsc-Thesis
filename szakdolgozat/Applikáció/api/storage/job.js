@@ -11,7 +11,6 @@ async function getJob(id) {
 }
 
 function updateJob(ID, job) {
-  console.log(job);
   let size = Object.keys(job).length;
   let myString = "";
   let i = 0;
@@ -31,7 +30,6 @@ function updateJob(ID, job) {
       }
     }
   }
-  console.log(myString);
   pool.query(
     `UPDATE jobs SET ${myString} WHERE id=$1`,
     [ID],

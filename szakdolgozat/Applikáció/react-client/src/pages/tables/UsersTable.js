@@ -297,7 +297,7 @@ function EnhancedTable() {
     };
     //edit
     const handleInfoIcon = (id) => {
-      window.open(`/user?id=${id}`);
+      window.open(`/users/${id}`);
     };
     const handleVerified = (email_verified) => {
       if (email_verified) {

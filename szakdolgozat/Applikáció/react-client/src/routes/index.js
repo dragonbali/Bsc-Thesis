@@ -121,11 +121,6 @@ const dashboardsRoutes = {
       name: "Alap adatok",
       component: Default,
     },
-    /*{
-      path: "/dashboard/analytics",
-      name: "Analitika",
-      component: Analytics,
-    },*/
   ],
   component: null,
 };
@@ -332,22 +327,22 @@ const formsRoutes = {
   icon: <List />,
   children: [
     {
-      path: "/tables/worker-table",
+      path: "/tables/workers/table",
       name: "Workers",
       component: WorkerTable,
     },
     {
-      path: "/tables/users-table",
+      path: "/tables/users/table",
       name: "Users",
       component: UsersTable,
     },
     {
-      path: "/tables/plans-table",
+      path: "/tables/plans/table",
       name: "Plans",
       component: PlansTable,
     },
     {
-      path: "/tables/jobs-table",
+      path: "/tables/jobs/table",
       name: "Jobs",
       component: JobsTable,
     },
@@ -361,39 +356,24 @@ const tablesRoutes = {
   icon: <List />,
   children: [
     {
-      path: "/tables/simple-table",
-      name: "Simple Table",
-      component: SimpleTable,
-    },
-    {
-      path: "/tables/advanced-table",
-      name: "Advanced Table",
-      component: AdvancedTable,
-    },
-    {
-      path: "/worker",
+      path: "/workers/:id",
       name: "Edit Worker",
       component: EditWorker,
     },
     {
-      path: "/user",
+      path: "/users/:id",
       name: "Edit User",
       component: EditUser,
     },
     {
-      path: "/plan",
+      path: "/plans/:id",
       name: "Edit Plan",
       component: EditPlan,
     },
     {
-      path: "/job",
+      path: "/jobs/:id",
       name: "Edit Job",
       component: EditJob,
-    },
-    {
-      path: "/tables/data-grid",
-      name: "Data Grid",
-      component: DataGrid,
     },
   ],
   component: null,

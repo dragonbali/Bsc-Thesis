@@ -68,7 +68,7 @@ const DoughnutChart = ({ theme }) => {
     const fetchData = async () => {
       setIsLoaded(false);
       try {
-        const [sales] = await axios.all([axios.get(API_URL + "/salesinfo")]);
+        const [sales] = await axios.all([axios.get(API_URL + "/info/sales")]);
         setSalesinfo(sales.data);
       } catch (error) {
         setError(error);

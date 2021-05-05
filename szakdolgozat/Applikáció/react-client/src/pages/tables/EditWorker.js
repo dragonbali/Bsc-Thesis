@@ -43,7 +43,7 @@ function EditWorker() {
       setIsLoaded(false);
       try {
         const [worker] = await axios.all([
-          axios.get(API_URL + "/worker?id=" + workerId),
+          axios.get(API_URL + window.location.pathname),
         ]);
         setWorker(worker.data.rows[0]);
       } catch (error) {
@@ -69,7 +69,7 @@ function EditWorker() {
 
     const handleSubmitButton = (ThisWorker) => {
       axios
-        .put(`${API_URL}/update-worker?id=${ThisWorker.id}`, ThisWorker)
+        .put(`${API_URL}/workers/update/worker/${ThisWorker.id}`, ThisWorker)
         .then(() => {
           Swal.fire({
             icon: "success",

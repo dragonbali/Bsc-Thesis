@@ -308,7 +308,7 @@ function EnhancedTable() {
     };
     //edit
     const handleInfoIcon = (id) => {
-      window.open(`/job?id=${id}`);
+      window.open(`/jobs/${id}`);
     };
     return (
       <div>

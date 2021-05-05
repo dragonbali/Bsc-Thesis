@@ -3,7 +3,6 @@ import axios from "axios";
 import { API_URL } from "../../constants";
 
 import styled from "styled-components/macro";
-import { useLocation } from "react-router-dom";
 
 import Swal from "sweetalert2";
 
@@ -26,12 +25,6 @@ const TextField = styled(MuiTextField)(spacing);
 const Button = styled(MuiButton)(spacing);
 
 function EditPlan() {
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-
-  let query = useQuery();
-  const planId = query.get("id");
   //sates
   const [reload, setReload] = React.useState(false);
   //api
@@ -43,7 +36,7 @@ function EditPlan() {
       setIsLoaded(false);
       try {
         const [plan] = await axios.all([
-          axios.get(API_URL + "/plan?id=" + planId),
+          axios.get(API_URL + window.location.pathname),
         ]);
         setPlan(plan.data.rows[0]);
       } catch (error) {
@@ -69,7 +62,7 @@ function EditPlan() {
 
     const handleSubmitButton = (ThisPlan) => {
       axios
-        .put(`${API_URL}/update-plan?id=${ThisPlan.id}`, ThisPlan)
+        .put(`${API_URL}/plans/update/plan/${ThisPlan.id}`, ThisPlan)
         .then(() => {
           Swal.fire({
             icon: "success",

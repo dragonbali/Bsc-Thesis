@@ -12,7 +12,7 @@ async function collect(request, response) {
   }
 }
 async function get(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   try {
     let rows = await db.getJob(id);
     response.status(201).json({ message: "successful query", rows });
@@ -25,7 +25,7 @@ async function get(request, response) {
 }
 
 function update(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   const job = request.body;
   try {
     db.updateJob(id, job);

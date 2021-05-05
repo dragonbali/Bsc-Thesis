@@ -302,7 +302,7 @@ function EnhancedTable() {
     };
     //edit
     const handleInfoIcon = (id) => {
-      window.open(`/plan?id=${id}`);
+      window.open(`/plans/${id}`);
     };
     return (
       <div>

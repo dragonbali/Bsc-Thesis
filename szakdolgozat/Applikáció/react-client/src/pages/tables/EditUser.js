@@ -43,7 +43,7 @@ function EditUser() {
       setIsLoaded(false);
       try {
         const [user] = await axios.all([
-          axios.get(API_URL + "/user?id=" + userId),
+          axios.get(API_URL + window.location.pathname),
         ]);
         setuser(user.data.rows[0]);
       } catch (error) {
@@ -69,7 +69,7 @@ function EditUser() {
 
     const handleSubmitButton = (ThisUser) => {
       axios
-        .put(`${API_URL}/update-user?id=${ThisUser.id}`, ThisUser)
+        .put(`${API_URL}/users/update/user/${ThisUser.id}`, ThisUser)
         .then(() => {
           Swal.fire({
             icon: "success",

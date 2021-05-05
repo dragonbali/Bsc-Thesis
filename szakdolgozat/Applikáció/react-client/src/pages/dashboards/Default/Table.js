@@ -52,7 +52,7 @@ function DashboardTable() {
       setIsLoaded(false);
       try {
         const [billing] = await axios.all([
-          axios.get(API_URL + "/sixbillinginfo"),
+          axios.get(API_URL + "/info/sixbillings"),
         ]);
         setData(billing.data);
       } catch (error) {

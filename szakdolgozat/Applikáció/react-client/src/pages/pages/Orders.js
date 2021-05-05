@@ -147,7 +147,7 @@ function EnhancedTable() {
       setIsLoaded(false);
       try {
         const [billing, workers] = await axios.all([
-          axios.get(API_URL + "/billinginfo"),
+          axios.get(API_URL + "/info/billings"),
           axios.get(API_URL + "/workers"),
         ]);
         setData(billing.data);
@@ -228,7 +228,7 @@ function EnhancedTable() {
             const element = data.rows[i];
             if (element.id == value) {
               axios
-                .put(`${API_URL}/update-completed?id=${value}`, {
+                .put(`${API_URL}/workers/update/completed/${value}`, {
                   completed: checked,
                   items: element.payment_prep_request.items,
                   user_id: element.user_id,
@@ -248,7 +248,7 @@ function EnhancedTable() {
       const value = event.target.value;
       const checked = event.target.checked;
       axios
-        .put(`${API_URL}/update-inspection?id=${value}`, {
+        .put(`${API_URL}/workers/update/inspection/${value}`, {
           inspected: checked,
         })
         .then(() => {
@@ -319,7 +319,7 @@ function EnhancedTable() {
       }
 
       axios
-        .put(`${API_URL}/update-regnumber?id=${user_id}`, {
+        .put(`${API_URL}/workers/update/regnumber/${user_id}`, {
           registration_number: regnum,
         })
         .then(() => {

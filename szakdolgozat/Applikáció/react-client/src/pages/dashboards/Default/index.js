@@ -33,9 +33,9 @@ function Default() {
       setIsLoaded(false);
       try {
         const [sales, workers, billing] = await axios.all([
-          axios.get(API_URL + "/salesinfo"),
+          axios.get(API_URL + "/info/sales"),
           axios.get(API_URL + "/workers"),
-          axios.get(API_URL + "/billinginfo"),
+          axios.get(API_URL + "/info/billings"),
         ]);
         setData(sales.data);
         setWorkers(workers.data);

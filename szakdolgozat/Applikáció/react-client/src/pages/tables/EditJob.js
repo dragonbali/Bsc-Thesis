@@ -3,10 +3,8 @@ import axios from "axios";
 import { API_URL } from "../../constants";
 
 import styled from "styled-components/macro";
-import { useLocation } from "react-router-dom";
 
 import Swal from "sweetalert2";
-import moment from "moment";
 
 import {
   Button as MuiButton,
@@ -27,15 +25,8 @@ const TextField = styled(MuiTextField)(spacing);
 const Button = styled(MuiButton)(spacing);
 
 function EditJob() {
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-
-  let query = useQuery();
-  const jobId = query.get("id");
   //sates
   const [reload, setReload] = React.useState(false);
-  const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
   //api
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,8 +36,9 @@ function EditJob() {
     const fetchData = async () => {
       setIsLoaded(false);
       try {
+        window.location.pathname;
         const [job] = await axios.all([
-          axios.get(API_URL + "/job?id=" + jobId),
+          axios.get(API_URL + window.location.pathname),
         ]);
         setJob(job.data.rows[0]);
       } catch (error) {
@@ -71,14 +63,16 @@ function EditJob() {
     };
 
     const handleSubmitButton = (ThisJob) => {
-      axios.put(`${API_URL}/update-job?id=${ThisJob.id}`, ThisJob).then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Mentve",
-          showConfirmButton: false,
-          timer: 1000,
+      axios
+        .put(`${API_URL}/jobs/update/job/${ThisJob.id}`, ThisJob)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Mentve",
+            showConfirmButton: false,
+            timer: 1000,
+          });
         });
-      });
       reload ? setReload(false) : setReload(true);
     };
 

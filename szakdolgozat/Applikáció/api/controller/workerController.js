@@ -2,7 +2,7 @@ const db = require("../storage/worker");
 const planService = require("../storage/plan");
 
 function setRegNumber(request, response) {
-  const user_id = parseInt(request.query.id);
+  const user_id = parseInt(request.params.id);
   const registration_number = request.body.registration_number;
   try {
     db.setRegNumber(user_id, registration_number);
@@ -18,7 +18,7 @@ function setRegNumber(request, response) {
 }
 
 function updateWorkerInspection(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   const inspected = request.body.inspected;
   try {
     db.setWorkerInspected(id, inspected);
@@ -34,7 +34,7 @@ function updateWorkerInspection(request, response) {
 }
 
 function updateWorkerCompleted(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   const user_id = request.body.user_id;
   const completed = request.body.completed;
   const items = request.body.items;
@@ -64,7 +64,7 @@ async function collect(request, response) {
   }
 }
 async function get(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   try {
     let rows = await db.getWorker(id);
     response.status(201).json({ message: "successful query", rows });
@@ -77,7 +77,7 @@ async function get(request, response) {
 }
 
 function update(request, response) {
-  const id = parseInt(request.query.id);
+  const id = parseInt(request.params.id);
   const worker = request.body;
   try {
     db.updateWorker(id, worker);

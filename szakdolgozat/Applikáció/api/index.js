@@ -21,32 +21,36 @@ app.use((req, res, next) => {
 app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
 });
-app.get("/salesinfo", billingController.getSalesInfo);
-app.get("/billinginfo", billingController.get);
-app.get("/sixbillinginfo", billingController.getTopSixOrders);
+app.get("/info/sales", billingController.getSalesInfo);
+app.get("/info/billings", billingController.get);
+app.get("/info/sixbillings", billingController.getTopSixOrders);
 
 app.get("/workers", workerController.collect);
-app.get("/worker", workerController.get);
+app.get("/workers/:id", workerController.get);
 
 app.get("/users", usersController.collect);
-app.get("/user", usersController.get);
+app.get("/users/:id", usersController.get);
 
 app.get("/plans", planController.collect);
-app.get("/plan", planController.get);
+app.get("/plans/:id", planController.get);
 
 app.get("/jobs", jobController.collect);
-app.get("/job", jobController.get);
+app.get("/jobs/:id", jobController.get);
 
-app.put("/update-inspection", workerController.updateWorkerInspection);
-app.put("/update-completed", workerController.updateWorkerCompleted);
+app.put(
+  "/workers/update/inspection/:id",
+  workerController.updateWorkerInspection
+);
+app.put(
+  "/workers/update/completed/:id",
+  workerController.updateWorkerCompleted
+);
+app.put("/workers/update/regnumber/:id", workerController.setRegNumber);
 
-app.put("/update-regnumber", workerController.setRegNumber);
-
-app.put("/update-worker", workerController.update);
-app.put("/update-user", usersController.update);
-app.put("/update-plan", planController.update);
-app.put("/update-job", jobController.update);
-
+app.put("/workers/update/worker/:id", workerController.update);
+app.put("/users/update/user/:id", usersController.update);
+app.put("/plans/update/plan/:id", planController.update);
+app.put("/jobs/update/job/:id", jobController.update);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
