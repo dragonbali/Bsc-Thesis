@@ -1,6 +1,6 @@
 const db = require("../storage/user");
 
-async function getUsers(request, response) {
+async function collect(request, response) {
   try {
     let rows = await db.getUsers();
     response.status(201).json({ message: "successful query", rows });
@@ -11,7 +11,7 @@ async function getUsers(request, response) {
     });
   }
 }
-async function getUser(request, response) {
+async function get(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getUser(id);
@@ -24,7 +24,7 @@ async function getUser(request, response) {
   }
 }
 
-function updateUser(request, response) {
+function update(request, response) {
   const id = parseInt(request.query.id);
   const user = request.body;
   try {
@@ -41,7 +41,7 @@ function updateUser(request, response) {
 }
 
 module.exports = {
-  getUsers,
-  getUser,
-  updateUser,
+  collect,
+  get,
+  update,
 };

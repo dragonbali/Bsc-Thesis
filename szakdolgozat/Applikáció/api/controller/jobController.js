@@ -1,6 +1,6 @@
 const db = require("../storage/job");
 
-async function getJobs(request, response) {
+async function collect(request, response) {
   try {
     let rows = await db.getJobs();
     response.status(201).json({ message: "successful query", rows });
@@ -11,7 +11,7 @@ async function getJobs(request, response) {
     });
   }
 }
-async function getJob(request, response) {
+async function get(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getJob(id);
@@ -24,7 +24,7 @@ async function getJob(request, response) {
   }
 }
 
-function updateJob(request, response) {
+function update(request, response) {
   const id = parseInt(request.query.id);
   const job = request.body;
   try {
@@ -41,7 +41,7 @@ function updateJob(request, response) {
 }
 
 module.exports = {
-  getJobs,
-  getJob,
-  updateJob,
+  collect,
+  get,
+  update,
 };

@@ -22,23 +22,30 @@ app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
 });
 app.get("/salesinfo", billingController.getSalesInfo);
-app.get("/billinginfo", billingController.getOrders);
+app.get("/billinginfo", billingController.get);
 app.get("/sixbillinginfo", billingController.getTopSixOrders);
-app.get("/workers", workerController.getWorkers);
-app.get("/worker", workerController.getWorker);
-app.get("/users", usersController.getUsers);
-app.get("/user", usersController.getUser);
-app.get("/plans", planController.getPlans);
-app.get("/plan", planController.getPlan);
-app.get("/jobs", jobController.getJobs);
-app.get("/job", jobController.getJob);
+
+app.get("/workers", workerController.collect);
+app.get("/worker", workerController.get);
+
+app.get("/users", usersController.collect);
+app.get("/user", usersController.get);
+
+app.get("/plans", planController.collect);
+app.get("/plan", planController.get);
+
+app.get("/jobs", jobController.collect);
+app.get("/job", jobController.get);
+
 app.put("/update-inspection", workerController.updateWorkerInspection);
 app.put("/update-completed", workerController.updateWorkerCompleted);
+
 app.put("/update-regnumber", workerController.setRegNumber);
-app.put("/update-worker", workerController.updateWorker);
-app.put("/update-user", usersController.updateUser);
-app.put("/update-plan", planController.updatePlan);
-app.put("/update-job", jobController.updateJob);
+
+app.put("/update-worker", workerController.update);
+app.put("/update-user", usersController.update);
+app.put("/update-plan", planController.update);
+app.put("/update-job", jobController.update);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

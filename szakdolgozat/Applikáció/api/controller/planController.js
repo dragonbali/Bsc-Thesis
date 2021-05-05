@@ -1,6 +1,6 @@
 const db = require("../storage/plan");
 
-async function getPlans(request, response) {
+async function collect(request, response) {
   try {
     let rows = await db.getPlans();
     response.status(201).json({ message: "successful query", rows });
@@ -11,7 +11,7 @@ async function getPlans(request, response) {
     });
   }
 }
-async function getPlan(request, response) {
+async function get(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getPlan(id);
@@ -24,7 +24,7 @@ async function getPlan(request, response) {
   }
 }
 
-function updatePlan(request, response) {
+function update(request, response) {
   const id = parseInt(request.query.id);
   const plan = request.body;
   try {
@@ -41,7 +41,7 @@ function updatePlan(request, response) {
 }
 
 module.exports = {
-  getPlans,
-  getPlan,
-  updatePlan,
+  collect,
+  get,
+  update,
 };

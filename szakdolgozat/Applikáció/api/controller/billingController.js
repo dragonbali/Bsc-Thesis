@@ -12,7 +12,7 @@ async function getSalesInfo(request, response) {
   }
 }
 
-async function getOrders(request, response) {
+async function get(request, response) {
   try {
     let rows = await db.getOrders();
     response.status(201).json({ message: "successful query", rows });
@@ -38,6 +38,6 @@ async function getTopSixOrders(request, response) {
 
 module.exports = {
   getSalesInfo,
-  getOrders,
+  get,
   getTopSixOrders,
 };

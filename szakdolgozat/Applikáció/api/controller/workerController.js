@@ -52,7 +52,7 @@ function updateWorkerCompleted(request, response) {
   }
 }
 
-async function getWorkers(request, response) {
+async function collect(request, response) {
   try {
     let rows = await db.getWorkers();
     response.status(201).json({ message: "successful query", rows });
@@ -63,7 +63,7 @@ async function getWorkers(request, response) {
     });
   }
 }
-async function getWorker(request, response) {
+async function get(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getWorker(id);
@@ -76,7 +76,7 @@ async function getWorker(request, response) {
   }
 }
 
-function updateWorker(request, response) {
+function update(request, response) {
   const id = parseInt(request.query.id);
   const worker = request.body;
   try {
@@ -95,8 +95,8 @@ function updateWorker(request, response) {
 module.exports = {
   updateWorkerInspection,
   updateWorkerCompleted,
-  getWorkers,
-  getWorker,
+  collect,
+  get,
   setRegNumber,
-  updateWorker,
+  update,
 };
