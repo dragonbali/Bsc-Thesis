@@ -3,7 +3,7 @@ const db = require("../storage/user");
 async function getUsers(request, response) {
   try {
     let rows = await db.getUsers();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find users",
@@ -15,7 +15,7 @@ async function getUser(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getUser(id);
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find user",

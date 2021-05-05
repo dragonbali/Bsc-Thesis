@@ -3,7 +3,7 @@ const db = require("../storage/plan");
 async function getPlans(request, response) {
   try {
     let rows = await db.getPlans();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find plans",
@@ -15,7 +15,7 @@ async function getPlan(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getPlan(id);
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find plan",

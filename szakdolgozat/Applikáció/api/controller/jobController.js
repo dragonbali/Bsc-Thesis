@@ -3,7 +3,7 @@ const db = require("../storage/job");
 async function getJobs(request, response) {
   try {
     let rows = await db.getJobs();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find jobs",
@@ -15,7 +15,7 @@ async function getJob(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getJob(id);
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find job",

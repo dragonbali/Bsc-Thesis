@@ -1,40 +1,48 @@
 const pool = require("./repository");
 
 async function getOrders() {
-  const res = await pool.query("SELECT * FROM billing_info");
+  const res = await pool.query(`SELECT * FROM billing_info`);
   return res.rows;
 }
 async function getTopSixOrders() {
   const res = await pool.query(
-    "SELECT * FROM billing_info ORDER BY id DESC LIMIT 6"
+    `SELECT * FROM billing_info ORDER BY id DESC LIMIT 6`
   );
   return res.rows;
 }
 //now
 async function getAllSalesOfToday() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 day'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 day'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllSalesOfTheWeek() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 week'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 week'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllSalesOfTheMonth() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 month'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 month'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllMoneyOfTheMonth() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 month';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 month';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {
@@ -49,7 +57,9 @@ async function getAllMoneyOfTheMonth() {
 
 async function getAllMoneyOfTheWeek() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 week';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 week';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {
@@ -64,7 +74,9 @@ async function getAllMoneyOfTheWeek() {
 
 async function getAllMoneyOfTheDay() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 day';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 day';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {
@@ -79,7 +91,9 @@ async function getAllMoneyOfTheDay() {
 
 async function getAllPackageInfosOfTheMonth() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '1 month';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '1 month';`
   );
   let counter3Month = 0;
   let counter6Month = 0;
@@ -110,28 +124,40 @@ async function getAllPackageInfosOfTheMonth() {
 
 async function getAllSalesOfPreviousDay() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 day' AND created_at::date < now() - interval '1 day'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '2 day' ` +
+      `AND created_at::date < now() - interval '1 day'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllSalesOfPreviousWeek() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 week' AND created_at::date < now() - interval '1 week'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '2 week' ` +
+      `AND created_at::date < now() - interval '1 week'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllSalesOfPreviousMonth() {
   const res = await pool.query(
-    `SELECT COUNT(*) FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 month' AND created_at::date < now() - interval '1 month'`
+    `SELECT COUNT(*) FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '2 month' ` +
+      `AND created_at::date < now() - interval '1 month'`
   );
   return parseInt(res.rows[0].count);
 }
 
 async function getAllMoneyOfPreviousMonth() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 month' AND created_at::date < now() - interval '1 month';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '2 month' ` +
+      `AND created_at::date < now() - interval '1 month';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {
@@ -146,7 +172,10 @@ async function getAllMoneyOfPreviousMonth() {
 
 async function getAllMoneyOfPreviousWeek() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 week' AND created_at::date < now() - interval '1 week';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true ` +
+      `AND created_at::date > now() - interval '2 week' ` +
+      `AND created_at::date < now() - interval '1 week';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {
@@ -161,7 +190,9 @@ async function getAllMoneyOfPreviousWeek() {
 
 async function getAllMoneyOfPreviousDay() {
   const res = await pool.query(
-    `SELECT payment_prep_request->'items' "items" FROM billing_info WHERE completed=true AND created_at::date > now() - interval '2 day' AND created_at::date < now() - interval '1 day';`
+    `SELECT payment_prep_request->'items' "items" FROM billing_info ` +
+      `WHERE completed=true AND created_at::date > now() - interval '2 day' ` +
+      `AND created_at::date < now() - interval '1 day';`
   );
   let income = 0;
   for (let i = 0; i < res.rows.length; i++) {

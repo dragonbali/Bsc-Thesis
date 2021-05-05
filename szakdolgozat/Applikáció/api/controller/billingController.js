@@ -3,7 +3,7 @@ const db = require("../storage/billing");
 async function getSalesInfo(request, response) {
   try {
     let rows = await db.getSalesInfo();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find billing info",
@@ -15,7 +15,7 @@ async function getSalesInfo(request, response) {
 async function getOrders(request, response) {
   try {
     let rows = await db.getOrders();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find billing info",
@@ -27,7 +27,7 @@ async function getOrders(request, response) {
 async function getTopSixOrders(request, response) {
   try {
     let rows = await db.getTopSixOrders();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find billing info",

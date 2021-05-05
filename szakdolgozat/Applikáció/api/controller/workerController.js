@@ -55,7 +55,7 @@ function updateWorkerCompleted(request, response) {
 async function getWorkers(request, response) {
   try {
     let rows = await db.getWorkers();
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find billing info",
@@ -67,7 +67,7 @@ async function getWorker(request, response) {
   const id = parseInt(request.query.id);
   try {
     let rows = await db.getWorker(id);
-    response.status(201).json({ message: "lekerdezes sikeres", rows });
+    response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
       message: "could not find billing info",

@@ -67,7 +67,15 @@ async function setPlan(user_id, completed, items) {
     await client.query("BEGIN");
     try {
       client.query(
-        "UPDATE worker_plan SET active=$1, plan_valid_until=$2, plan_id=$3, first_place_booster=$4, first_place_booster_valid_until=$5, social_ads=$6, social_ads_valid_until=$7 WHERE worker_id=$8",
+        `UPDATE worker_plan SET ` +
+          `active=$1, ` +
+          `plan_valid_until=$2, ` +
+          `plan_id=$3, ` +
+          `first_place_booster=$4, ` +
+          `first_place_booster_valid_until=$5, ` +
+          `social_ads=$6, ` +
+          `social_ads_valid_until=$7 ` +
+          `WHERE worker_id=$8`,
         [
           infos.active,
           infos.planValidUntil,
@@ -80,7 +88,12 @@ async function setPlan(user_id, completed, items) {
         ]
       );
       client.query(
-        "UPDATE worker SET payed_plan=$1, visible=$1, highlight=$1, priority=$2 WHERE id=$3",
+        `UPDATE worker SET ` +
+          `payed_plan=$1, ` +
+          `visible=$1, ` +
+          `highlight=$1, ` +
+          `priority=$2 ` +
+          `WHERE id=$3`,
         [infos.active, infos.priority, infos.workerId]
       );
       client.query("COMMIT");
