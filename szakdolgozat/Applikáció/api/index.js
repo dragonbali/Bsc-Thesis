@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
 });
+
 app.get("/info/sales", billingController.getSalesInfo);
 app.get("/info/billings", billingController.get);
 app.get("/info/sixbillings", billingController.getTopSixOrders);
@@ -51,6 +52,7 @@ app.put("/workers/update/worker/:id", workerController.update);
 app.put("/users/update/user/:id", usersController.update);
 app.put("/plans/update/plan/:id", planController.update);
 app.put("/jobs/update/job/:id", jobController.update);
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
