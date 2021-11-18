@@ -4,19 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../redux/actions/themeActions";
 import { THEMES } from "../constants";
 import { green, grey, indigo } from "@material-ui/core/colors";
-import { Link } from "react-router-dom";
 
 import {
   Box,
-  Button,
   Drawer,
   Fab as MuiFab,
   Grid,
-  ListItem,
   Typography,
 } from "@material-ui/core";
-
-import { Alert } from "@material-ui/lab";
 
 import { Palette as PaletteIcon } from "@material-ui/icons";
 
@@ -91,17 +86,6 @@ const Fab = styled(MuiFab)`
 const Wrapper = styled.div`
   width: 258px;
   overflow-x: hidden;
-`;
-
-const Heading = styled(ListItem)`
-  font-size: ${(props) => props.theme.typography.h5.fontSize};
-  font-weight: ${(props) => props.theme.typography.fontWeightMedium};
-  font-family: ${(props) => props.theme.typography.fontFamily};
-  min-height: 56px;
-
-  ${(props) => props.theme.breakpoints.up("sm")} {
-    min-height: 64px;
-  }
 `;
 
 function Demo({ title, theme }) {

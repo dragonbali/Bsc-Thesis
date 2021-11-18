@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
 import DateFnsUtils from "@date-io/date-fns";
 
 import { ThemeProvider } from "styled-components/macro";
@@ -26,10 +25,6 @@ function App() {
 
   return (
     <React.Fragment>
-      <Helmet
-        titleTemplate="%s | Mestertkeresek"
-        defaultTitle="Material App"
-      />
       <StylesProvider jss={jss}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <MuiThemeProvider theme={createTheme(theme.currentTheme)}>

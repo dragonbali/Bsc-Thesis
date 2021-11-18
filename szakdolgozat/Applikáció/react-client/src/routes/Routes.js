@@ -1,16 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import {
-  dashboardLayoutRoutes,
-  authLayoutRoutes,
-  presentationLayoutRoutes,
-  protectedRoutes,
-} from "./index";
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { dashboardLayoutRoutes } from "./index";
 
 import DashboardLayout from "../layouts/Dashboard";
-import AuthLayout from "../layouts/Auth";
-import PresentationLayout from "../layouts/Presentation";
-import Page404 from "../pages/auth/Page404";
+import Page404 from "../pages/error/Page404";
 
 const childRoutes = (Layout, routes) =>
   routes.map(({ component: Component, guard, children, path }, index) => {
@@ -54,26 +52,15 @@ const childRoutes = (Layout, routes) =>
 const Routes = () => (
   <Router>
     <Switch>
-    <Route
-                exact
-                path="/"
-                render={() => {
-                    return (
-                      <Redirect to="/dashboard/default" /> 
-                    )
-                }}
-              />
-      {childRoutes(DashboardLayout, dashboardLayoutRoutes)}
-      {childRoutes(DashboardLayout, protectedRoutes)}
-      {childRoutes(AuthLayout, authLayoutRoutes)}
-      {childRoutes(PresentationLayout, presentationLayoutRoutes)}
       <Route
-        render={() => (
-          <AuthLayout>
-            <Page404 />
-          </AuthLayout>
-        )}
+        exact
+        path="/"
+        render={() => {
+          return <Redirect to="/dashboard" />;
+        }}
       />
+      {childRoutes(DashboardLayout, dashboardLayoutRoutes)}
+      <Route render={() => <Page404 />} />
     </Switch>
   </Router>
 );

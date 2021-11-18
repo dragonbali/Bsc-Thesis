@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components/macro";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/AppBar";
-import Footer from "../components/Footer";
 import Settings from "../components/Settings";
 
 import { spacing } from "@material-ui/system";
@@ -101,7 +100,6 @@ const Dashboard = ({ children, routes, width }) => {
         <MainContent p={isWidthUp("md", width) ? 12 : 5}>
           {children}
         </MainContent>
-        <Footer />
       </AppContent>
       <Settings />
     </Root>
