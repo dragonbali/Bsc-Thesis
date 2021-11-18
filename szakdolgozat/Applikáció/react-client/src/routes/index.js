@@ -7,7 +7,7 @@ import { List, ShoppingCart, Sliders } from "react-feather";
 // Dashboard components
 const Default = async(() => import("../pages/statistics"));
 
-const Orders = async(() => import("../pages/orders/Orders"));
+const Orders = async(() => import("../pages/orders/index"));
 
 // Tables components
 const WorkerTable = async(() => import("../pages/tables/WorkerTable"));
