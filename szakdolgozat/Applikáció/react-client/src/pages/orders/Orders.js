@@ -10,8 +10,6 @@ import Swal from "sweetalert2";
 import {
   Avatar as MuiAvatar,
   Box,
-  Breadcrumbs as MuiBreadcrumbs,
-  Button as MuiButton,
   Chip as MuiChip,
   Divider as MuiDivider,
   Grid,
@@ -25,7 +23,6 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
-  TextField as MuiTextField,
   Typography,
   FormControl,
   FormControlLabel,
@@ -34,10 +31,7 @@ import {
 } from "@material-ui/core";
 
 import { green, orange, red } from "@material-ui/core/colors";
-import {
-  Info as InfoIcon,
-  RemoveRedEye as RemoveRedEyeIcon,
-} from "@material-ui/icons";
+import { RemoveRedEye as RemoveRedEyeIcon } from "@material-ui/icons";
 
 import { spacing } from "@material-ui/system";
 import { API_URL } from "../../constants";
@@ -45,9 +39,6 @@ import { API_URL } from "../../constants";
 const Divider = styled(MuiDivider)(spacing);
 
 const Paper = styled(MuiPaper)(spacing);
-
-const TextField = styled(MuiTextField)(spacing);
-const Button = styled(MuiButton)(spacing);
 
 const Chip = styled(MuiChip)`
   ${spacing};
@@ -93,11 +84,10 @@ const headCells = [
   { id: "created_at", alignment: "left", label: "Dátum" },
   { id: "tax_number", alignment: "left", label: "Adószám" },
   { id: "price", alignment: "left", label: "Összeg" },
-  { id: "completed", alignment: "left", label: "Fizetési státusz" },
+  { id: "completed", alignment: "center", label: "Fizetési státusz" },
   { id: "payment_method", alignment: "left", label: "Fizetési mód" },
-  { id: "actions", alignment: "left", label: "Műveletek" },
-  { id: "switch", alignment: "left", label: "Kapcsoló" },
-  { id: "regnum", alignment: "left", label: "Nyilvántartási szám" },
+  { id: "actions", alignment: "center", label: "Műveletek" },
+  { id: "switch", alignment: "left", label: "Kapcsolók" },
 ];
 
 function EnhancedTableHead(props) {
@@ -289,49 +279,6 @@ function EnhancedTable() {
         }
       }
     };
-    //reg number
-    const showRegNumber = (user_id) => {
-      for (let i = 0; i < workers.rows.length; i++) {
-        const element = workers.rows[i];
-        if (element.user_id === user_id) {
-          return element.registration_number;
-        }
-      }
-    };
-
-    const handleRegNumberChange = (event, user_id) => {
-      for (let i = 0; i < workers.rows.length; i++) {
-        const element = workers.rows[i];
-        if (element.user_id === user_id) {
-          workers.rows[i].registration_number = event.target.value;
-          reload ? setReload(false) : setReload(true);
-        }
-      }
-    };
-
-    const handleRegNumberSubmit = (user_id) => {
-      let regnum = null;
-      for (let i = 0; i < workers.rows.length; i++) {
-        const element = workers.rows[i];
-        if (element.user_id === user_id) {
-          regnum = element.registration_number;
-        }
-      }
-
-      axios
-        .put(`${API_URL}/workers/update/regnumber/${user_id}`, {
-          registration_number: regnum,
-        })
-        .then(() => {
-          reload ? setReload(false) : setReload(true);
-          Swal.fire({
-            icon: "success",
-            title: "Mentve",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        });
-    };
 
     //avatar
     const avatarColor = (completed, payment_method) => {
@@ -404,7 +351,7 @@ function EnhancedTable() {
                           {row.payment_prep_request.billing_address.tax_number}
                         </TableCell>
                         <TableCell align="left">{showPrice(row.id)}</TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                           {row.completed === true && (
                             <Chip
                               size="small"
@@ -437,20 +384,15 @@ function EnhancedTable() {
                             )}
                         </TableCell>
                         <TableCell align="left">{row.payment_method}</TableCell>
-                        <TableCell padding="none" align="left">
-                          <Box mr={2}>
-                            <IconButton aria-label="info">
-                              <InfoIcon />
-                            </IconButton>
-                            <IconButton
-                              aria-label="details"
-                              onClick={() => {
-                                handleEyeIcon(row.user_id);
-                              }}
-                            >
-                              <RemoveRedEyeIcon />
-                            </IconButton>
-                          </Box>
+                        <TableCell align="center">
+                          <IconButton
+                            aria-label="details"
+                            onClick={() => {
+                              handleEyeIcon(row.user_id);
+                            }}
+                          >
+                            <RemoveRedEyeIcon />
+                          </IconButton>
                         </TableCell>
                         <TableCell align="left">
                           <FormControl component="fieldset">
@@ -490,33 +432,7 @@ function EnhancedTable() {
                                 label="Ellenőrizve"
                               />
                             </FormGroup>
-                            {"user_id: " + row.user_id}
                           </FormControl>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Grid item md={6}>
-                            <TextField
-                              name="registration_number"
-                              label="Nyilv. szám"
-                              value={showRegNumber(row.user_id)}
-                              onChange={(event) => {
-                                handleRegNumberChange(event, row.user_id);
-                              }}
-                              variant="outlined"
-                              autoComplete="off"
-                              my={2}
-                            />
-                            <Button
-                              type="submit"
-                              variant="contained"
-                              color="primary"
-                              onClick={() => {
-                                handleRegNumberSubmit(row.user_id);
-                              }}
-                            >
-                              Mentés
-                            </Button>
-                          </Grid>
                         </TableCell>
                       </TableRow>
                     );
@@ -556,11 +472,9 @@ function OrderList() {
           </Typography>
         </Grid>
       </Grid>
-
       <Divider my={6} />
-
       <Grid container spacing={6}>
-        <Grid item xs={12}>
+        <Grid item md={12}>
           <EnhancedTable />
         </Grid>
       </Grid>
