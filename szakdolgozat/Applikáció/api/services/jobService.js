@@ -1,4 +1,4 @@
-const job = require("../model/job");
+const job = require("../db/job");
 const utils = require("../utils/index");
 
 async function getJobs() {

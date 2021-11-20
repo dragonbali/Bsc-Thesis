@@ -1,4 +1,4 @@
-const users = require("../model/users");
+const users = require("../db/users");
 const utils = require("../utils/index");
 
 async function getUsers() {

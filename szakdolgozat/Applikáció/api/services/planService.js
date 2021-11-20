@@ -1,6 +1,6 @@
-const worker = require("../model/worker");
-const workerPlan = require("../model/workerPlan");
-const plans = require("../model/plans");
+const worker = require("../db/worker");
+const workerPlan = require("../db/workerPlan");
+const plans = require("../db/plans");
 const utils = require("../utils/index");
 
 async function setPlan(user_id, completed, items) {

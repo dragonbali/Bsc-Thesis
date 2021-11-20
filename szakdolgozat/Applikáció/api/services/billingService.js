@@ -1,4 +1,4 @@
-const billing = require("../model/billingInfo");
+const billing = require("../db/billingInfo");
 
 async function getOrders() {
   const res = await billing.getAllFromBillingInfo();

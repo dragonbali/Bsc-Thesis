@@ -1,5 +1,5 @@
-const worker = require("../model/worker");
-const billing = require("../model/billingInfo");
+const worker = require("../db/worker");
+const billing = require("../db/billingInfo");
 const utils = require("../utils/index");
 
 async function setWorkerInspected(workerID, inspected) {
