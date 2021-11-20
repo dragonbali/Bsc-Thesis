@@ -1,4 +1,5 @@
 const billing = require("../db/billingInfo");
+const utils = require("../utils/index");
 
 async function getOrders() {
   const res = await billing.getAllFromBillingInfo();
@@ -30,17 +31,17 @@ async function getAllSalesOfTheMonth() {
 //money
 async function getAllMoneyOfTheMonth() {
   const res = await billing.getAllMoneyOfTheMonthFromBillingInfo();
-  return calculateIncome(res);
+  return utils.calculateIncome(res);
 }
 
 async function getAllMoneyOfTheWeek() {
   const res = await billing.getAllMoneyOfTheWeekFromBillingInfo();
-  return calculateIncome(res);
+  return utils.calculateIncome(res);
 }
 
 async function getAllMoneyOfTheDay() {
   const res = await billing.getAllMoneyOfTheDayFromBillingInfo();
-  return calculateIncome(res);
+  return utils.calculateIncome(res);
 }
 
 //packages
@@ -91,35 +92,17 @@ async function getAllSalesOfPreviousMonth() {
 //money
 async function getAllMoneyOfPreviousMonth() {
   const res = await billing.getAllMoneyOfPreviousMonthFromBillingInfo();
-  return calculateIncome(res);
+  return utils.calculateIncome(res);
 }
 
 async function getAllMoneyOfPreviousWeek() {
   const res = await billing.getAllMoneyOfPreviousWeekFromBillingInfo();
-  return calculateIncome(res);
+  return utils.calculateIncome(res);
 }
 
 async function getAllMoneyOfPreviousDay() {
   const res = await billing.getAllMoneyOfPreviousDayFromBillingInfo();
-  return calculateIncome(res);
-}
-
-//functions
-function calculateIncome(res) {
-  let income = 0;
-  for (let i = 0; i < res.rows.length; i++) {
-    const element = res.rows[i];
-    for (let j = 0; j < element.items.length; j++) {
-      const oneItem = element.items[j];
-      income += oneItem.item_total * oneItem.quantity;
-    }
-  }
-  return income;
-}
-
-function calculatePercentage(last, now) {
-  let res = now - last;
-  return res / (last / 100);
+  return utils.calculateIncome(res);
 }
 
 //wrap all info into an object
@@ -128,11 +111,11 @@ async function getSalesInfo() {
     month: {
       quantity: await getAllSalesOfTheMonth(),
       money: await getAllMoneyOfTheMonth(),
-      moneyPercent: calculatePercentage(
+      moneyPercent: utils.calculatePercentage(
         await getAllMoneyOfPreviousMonth(),
         await getAllMoneyOfTheMonth()
       ),
-      quantityPercent: calculatePercentage(
+      quantityPercent: utils.calculatePercentage(
         await getAllSalesOfPreviousMonth(),
         await getAllSalesOfTheMonth()
       ),
@@ -145,11 +128,11 @@ async function getSalesInfo() {
     week: {
       quantity: await getAllSalesOfTheWeek(),
       money: await getAllMoneyOfTheWeek(),
-      moneyPercent: calculatePercentage(
+      moneyPercent: utils.calculatePercentage(
         await getAllMoneyOfPreviousWeek(),
         await getAllMoneyOfTheWeek()
       ),
-      quantityPercent: calculatePercentage(
+      quantityPercent: utils.calculatePercentage(
         await getAllSalesOfPreviousWeek(),
         await getAllSalesOfTheWeek()
       ),
@@ -157,11 +140,11 @@ async function getSalesInfo() {
     day: {
       quantity: await getAllSalesOfToday(),
       money: await getAllMoneyOfTheDay(),
-      moneyPercent: calculatePercentage(
+      moneyPercent: utils.calculatePercentage(
         await getAllMoneyOfPreviousDay(),
         await getAllMoneyOfTheDay()
       ),
-      quantityPercent: calculatePercentage(
+      quantityPercent: utils.calculatePercentage(
         await getAllSalesOfPreviousDay(),
         await getAllSalesOfToday()
       ),

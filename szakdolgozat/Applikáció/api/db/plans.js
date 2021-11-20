@@ -1,4 +1,4 @@
-const pool = require("./repository");
+const pool = require("../config/repository");
 
 async function getAllFromPlans() {
   return await pool.query("SELECT * FROM plans");

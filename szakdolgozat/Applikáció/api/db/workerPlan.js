@@ -1,4 +1,4 @@
-const pool = require("./repository");
+const pool = require("../config/repository");
 
 async function UpdateWorkerPlanAndWorker(infos) {
   const client = await pool.connect();

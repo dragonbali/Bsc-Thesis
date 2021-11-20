@@ -1,4 +1,4 @@
-const pool = require("./repository");
+const pool = require("../config/repository");
 
 async function getAllUsers() {
   return await pool.query("SELECT * FROM users");

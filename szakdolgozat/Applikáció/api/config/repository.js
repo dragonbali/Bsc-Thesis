@@ -1,4 +1,4 @@
-const config = require("../config/environtment");
+const config = require("./environtment");
 const Pool = require("pg").Pool;
 var types = require("pg").types;
 var Moment = require("moment");

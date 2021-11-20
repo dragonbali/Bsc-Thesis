@@ -1,4 +1,4 @@
-const pool = require("./repository");
+const pool = require("../config/repository");
 
 async function getWorkerByUserId(user_id) {
   return await pool.query(`SELECT id FROM worker WHERE user_id=$1;`, [user_id]);
