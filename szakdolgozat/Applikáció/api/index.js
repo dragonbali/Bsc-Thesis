@@ -46,7 +46,6 @@ app.put(
   "/workers/update/completed/:id",
   workerController.updateWorkerCompleted
 );
-app.put("/workers/update/regnumber/:id", workerController.setRegNumber);
 
 app.put("/workers/update/worker/:id", workerController.update);
 app.put("/users/update/user/:id", usersController.update);

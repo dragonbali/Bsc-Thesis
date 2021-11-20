@@ -1,8 +1,8 @@
-const db = require("../storage/user");
+const userService = require("../services/userService");
 
 async function collect(request, response) {
   try {
-    let rows = await db.getUsers();
+    let rows = await userService.getUsers();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -14,7 +14,7 @@ async function collect(request, response) {
 async function get(request, response) {
   const id = parseInt(request.params.id);
   try {
-    let rows = await db.getUser(id);
+    let rows = await userService.getUser(id);
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -24,11 +24,11 @@ async function get(request, response) {
   }
 }
 
-function update(request, response) {
+async function update(request, response) {
   const id = parseInt(request.params.id);
   const user = request.body;
   try {
-    db.updateUser(id, user);
+    await userService.updateUser(id, user);
     response.status(201).json({
       message: "updated user successfully",
     });

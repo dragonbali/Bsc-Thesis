@@ -1,27 +1,11 @@
-const db = require("../storage/worker");
-const planService = require("../storage/plan");
+const workerService = require("../services/workerService");
+const planService = require("../services/planService");
 
-function setRegNumber(request, response) {
-  const user_id = parseInt(request.params.id);
-  const registration_number = request.body.registration_number;
-  try {
-    db.setRegNumber(user_id, registration_number);
-    response.status(201).json({
-      message: "updated worker registration_number successfully",
-    });
-  } catch (err) {
-    response.status(500).json({
-      message: "could not update worker registration_number",
-      error: err.toString(),
-    });
-  }
-}
-
-function updateWorkerInspection(request, response) {
+async function updateWorkerInspection(request, response) {
   const id = parseInt(request.params.id);
   const inspected = request.body.inspected;
   try {
-    db.setWorkerInspected(id, inspected);
+    await workerService.setWorkerInspected(id, inspected);
     response.status(201).json({
       message: "updated worker inspection successfully",
     });
@@ -33,14 +17,14 @@ function updateWorkerInspection(request, response) {
   }
 }
 
-function updateWorkerCompleted(request, response) {
+async function updateWorkerCompleted(request, response) {
   const id = parseInt(request.params.id);
   const user_id = request.body.user_id;
   const completed = request.body.completed;
   const items = request.body.items;
   try {
-    db.setWorkerCompleted(id, completed);
-    planService.setPlan(user_id, completed, items);
+    await workerService.setWorkerCompleted(id, completed);
+    await planService.setPlan(user_id, completed, items);
     response.status(201).json({
       message: "updated worker inspection successfully",
     });
@@ -54,7 +38,7 @@ function updateWorkerCompleted(request, response) {
 
 async function collect(request, response) {
   try {
-    let rows = await db.getWorkers();
+    let rows = await workerService.getWorkers();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -66,7 +50,7 @@ async function collect(request, response) {
 async function get(request, response) {
   const id = parseInt(request.params.id);
   try {
-    let rows = await db.getWorker(id);
+    let rows = await workerService.getWorker(id);
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -76,11 +60,11 @@ async function get(request, response) {
   }
 }
 
-function update(request, response) {
+async function update(request, response) {
   const id = parseInt(request.params.id);
   const worker = request.body;
   try {
-    db.updateWorker(id, worker);
+    await workerService.updateWorker(id, worker);
     response.status(201).json({
       message: "updated worker successfully",
     });
@@ -97,6 +81,5 @@ module.exports = {
   updateWorkerCompleted,
   collect,
   get,
-  setRegNumber,
   update,
 };

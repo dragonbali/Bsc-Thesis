@@ -1,8 +1,8 @@
-const db = require("../storage/plan");
+const planService = require("../services/planService");
 
 async function collect(request, response) {
   try {
-    let rows = await db.getPlans();
+    let rows = await planService.getPlans();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -14,7 +14,7 @@ async function collect(request, response) {
 async function get(request, response) {
   const id = parseInt(request.params.id);
   try {
-    let rows = await db.getPlan(id);
+    let rows = await planService.getPlan(id);
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -24,11 +24,11 @@ async function get(request, response) {
   }
 }
 
-function update(request, response) {
+async function update(request, response) {
   const id = parseInt(request.params.id);
   const plan = request.body;
   try {
-    db.updatePlan(id, plan);
+    await planService.updatePlan(id, plan);
     response.status(201).json({
       message: "updated plan successfully",
     });

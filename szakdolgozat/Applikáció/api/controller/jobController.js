@@ -1,8 +1,8 @@
-const db = require("../storage/job");
+const jobService = require("../services/jobService");
 
 async function collect(request, response) {
   try {
-    let rows = await db.getJobs();
+    let rows = await jobService.getJobs();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -14,7 +14,7 @@ async function collect(request, response) {
 async function get(request, response) {
   const id = parseInt(request.params.id);
   try {
-    let rows = await db.getJob(id);
+    let rows = await jobService.getJob(id);
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -24,11 +24,11 @@ async function get(request, response) {
   }
 }
 
-function update(request, response) {
+async function update(request, response) {
   const id = parseInt(request.params.id);
   const job = request.body;
   try {
-    db.updateJob(id, job);
+    await jobService.updateJob(id, job);
     response.status(201).json({
       message: "updated job successfully",
     });

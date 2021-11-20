@@ -1,8 +1,8 @@
-const db = require("../storage/billing");
+const billingService = require("../services/billingService");
 
 async function getSalesInfo(request, response) {
   try {
-    let rows = await db.getSalesInfo();
+    let rows = await billingService.getSalesInfo();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -14,7 +14,7 @@ async function getSalesInfo(request, response) {
 
 async function get(request, response) {
   try {
-    let rows = await db.getOrders();
+    let rows = await billingService.getOrders();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
@@ -26,7 +26,7 @@ async function get(request, response) {
 
 async function getTopSixOrders(request, response) {
   try {
-    let rows = await db.getTopSixOrders();
+    let rows = await billingService.getTopSixOrders();
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
