@@ -8,7 +8,7 @@ import {
 import { dashboardLayoutRoutes } from "./index";
 
 import DashboardLayout from "../layouts/Dashboard";
-import Page404 from "../pages/error/Page404";
+import Page404 from "../layouts/Page404";
 
 const childRoutes = (Layout, routes) =>
   routes.map(({ component: Component, guard, children, path }, index) => {
