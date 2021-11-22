@@ -182,7 +182,6 @@ function EnhancedTableBody(props) {
       (payment_method === "barion" || payment_method === null) &&
       completed === false
     ) {
-      console.log("piros");
       return "#f44336";
     }
   };

@@ -16,7 +16,6 @@ function OrderList() {
   return (
     <React.Fragment>
       <Helmet title="Megrendelések" />
-
       <Grid justify="space-between" container spacing={24}>
         <Grid item>
           <Typography variant="h3" gutterBottom display="inline">

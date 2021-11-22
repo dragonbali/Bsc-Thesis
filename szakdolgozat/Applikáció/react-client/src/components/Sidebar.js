@@ -274,7 +274,7 @@ const Sidebar = ({ classes, staticContext, location, ...rest }) => {
   return (
     <Drawer variant="permanent" {...rest}>
       <Brand component={NavLink} to="/dashboard" button>
-        <BrandIcon /> <Box ml={1}>Mestertkeresek.hu</Box>
+        <BrandIcon /> <Box ml={1}>Admin App</Box>
       </Brand>
       <Scrollbar>
         <List disablePadding>

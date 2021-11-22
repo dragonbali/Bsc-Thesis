@@ -24,7 +24,7 @@ function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("created_at");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   //api
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,7 +72,7 @@ function EnhancedTable() {
     };
 
     const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
+      setRowsPerPage(parseInt(event.target.value));
       setPage(0);
     };
 
