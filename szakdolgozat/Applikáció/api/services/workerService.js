@@ -9,7 +9,7 @@ async function setWorkerInspected(workerID, inspected) {
   );
 
   if (res != true) {
-    throw `error at: ${res.message}}, Inspected and Can Issue Invoice Update`;
+    throw `error at: ${res.message}}`;
   }
 }
 async function setWorkerCompleted(ID, completed) {
@@ -19,7 +19,7 @@ async function setWorkerCompleted(ID, completed) {
   );
 
   if (res != true) {
-    throw `error at: ${res.message}}, Completed status Update`;
+    throw `error at: ${res.message}}`;
   }
 }
 

@@ -26,7 +26,7 @@ async function updateWorkerCompleted(request, response) {
     await workerService.setWorkerCompleted(id, completed);
     await planService.setPlan(user_id, completed, items);
     response.status(201).json({
-      message: "updated worker inspection successfully",
+      message: "updated worker successfully",
     });
   } catch (err) {
     response.status(500).json({
@@ -42,7 +42,7 @@ async function collect(request, response) {
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
-      message: "could not find billing info",
+      message: "could not find worker",
       error: err.toString(),
     });
   }
@@ -54,7 +54,7 @@ async function get(request, response) {
     response.status(201).json({ message: "successful query", rows });
   } catch (err) {
     response.status(500).json({
-      message: "could not find billing info",
+      message: "could not find worker",
       error: err.toString(),
     });
   }
